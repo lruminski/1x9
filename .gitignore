@@ -1,0 +1,14 @@
+.DS_Store
+.actionScriptProperties
+.flexProperties
+.project
+.settings/*
+main.swf
+database.yml
+environment.rb
+config/mongrel_cluster.yml
+config/environments/*
+log/*
+tmp/*
+db/schema.rb
+

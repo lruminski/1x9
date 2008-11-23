@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+    <script type="text/javascript" src="/javascripts/swfaddress-optimizer.js?flash=8&amp;swfaddress=<%= @swfaddress %>"></script>
+    <title><%=@title%></title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <script type="text/javascript" src="/javascripts/swfobject.js"></script>
+    <script type="text/javascript" src="/javascripts/swfaddress.js"></script>
+        <style type="text/css">
+            /* hide from ie on mac \*/
+            html {
+                height: 100%;
+                overflow: hidden;
+            }
+            #content {
+                height: 100%;
+            }
+            /* end hide */
+            body {
+                height: 100%;
+                margin: 0;
+                padding: 0;
+                background: #efefef;
+                font: 76% Arial, sans-serif;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="content">
+       		<noscript>
+           		<p>In order to view this page you need JavaScript and Flash Player 9+ support!</p>
+           		<div><%=render :partial => 'datasource', :locals => @datasource_params %></div>
+       		</noscript>
+       </div>
+       <script type="text/javascript">
+       // <![CDATA[
+        var flashvars = {};
+		<%= "flashvars.session_id = '#{session.session_id} '" %>
+        var params = {};
+        params.quality = "high";
+        params.bgcolor = "#efefef";
+		params.allowscriptaccess = "sameDomain"
+        var attributes = {};
+        swfobject.embedSWF("/main.swf", "content", "100%", "100%", "9.0.124", false, flashvars, params, attributes);
+		SWFAddress.setId("content")
+       // ]]>
+       </script>
+   </body>
+</html>

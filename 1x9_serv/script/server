@@ -1,0 +1,15 @@
+#!/usr/bin/env ruby
+
+DEBUG = true if ARGV.first == "debug"
+require File.dirname(__FILE__) + '/../config/boot'
+
+if defined?(DEBUG)
+  require 'lib/serv.rb'
+else
+  options = {
+    :dir_mode => :normal,
+    :dir => SERV_ROOT + '/tmp'
+  }
+
+  Daemons.run('lib/serv.rb', options)
+end

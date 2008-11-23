@@ -1,0 +1,10 @@
+== Welcome to 1X9 
+
+The ultimate Flex + Rails environment
+
+== How To:
+
+each entry begins with '/'
+each command begins with '#'
+
+and entry can be defined as a command by starting it with a '#', followed by the type of command it is [ruby,as3]

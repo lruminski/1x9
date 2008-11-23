@@ -1,0 +1,12 @@
+connection:
+  host: 127.0.0.1
+  user: guest
+  pass: guest
+  vhost: /
+  tls: false
+
+
+subscription:
+  game_exchange: gamex
+  serv_exchange: directx
+  serv_queue: serv

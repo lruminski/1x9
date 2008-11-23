@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application
+    xmlns:mx="http://www.adobe.com/2006/mxml"
+    initialize="xInit(event)"
+    creationComplete="initCore(event)"
+    backgroundColor="0xefefed" xmlns:x1="x.*">
+    <mx:Style source="main.css" />
+    <mx:Script>
+        <![CDATA[
+
+            public function initCore(event:Event):void
+            {
+                // start core
+                xnetwork.init();
+                xconsole.init();
+                xscreen.init();
+            }
+
+            // dynamic initialize
+            include "x/init.as";
+
+        ]]>
+    </mx:Script>
+</mx:Application>
