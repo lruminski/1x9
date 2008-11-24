@@ -74,13 +74,12 @@ package x.system
 
             if (is_addr())
             {
-                SWFAddress.setValue(input.text);
                 var entry:xEntry = new xEntry();
                 entry.find({addr: input.text}, screen.render)
 
             }
 
-            input.text = ""
+            input.text = "";
 
         }
 

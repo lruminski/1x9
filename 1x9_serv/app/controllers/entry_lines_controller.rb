@@ -1,21 +1,16 @@
 class EntryLinesController < Application
   
-  def index
-  end
-  
-  def show
-  end
-  
-  def update
-  end
-  
-  def new
-  end
-  
-  def create
-  end
-  
-  def save
+  def save(params)
+    params.symbolize_keys!;
+    
+    if params[:id] == -1
+      params.delete_if {|key, value| key == :id }
+    end
+    
+    entry_line = EntryLine.create params
+    entry_line.save
+    
+    return entry_line
   end
     
   def update_words(line_str)

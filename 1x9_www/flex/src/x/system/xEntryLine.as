@@ -1,9 +1,12 @@
 package x.system
 {
-    import org.amqp.patterns.CorrelatedMessageEvent;
+    import flash.display.DisplayObject;
+
 
     public class xEntryLine extends xEntry
     {
+
+        public var screenObj:xRenderLine;
 
         public function xEntryLine(id:int = -1, entry:xEntry = null, type:String = "entry_lines")
         {
@@ -26,6 +29,16 @@ package x.system
             }
         }
 
+        public function render():DisplayObject
+        {
+            if (screenObj == null)
+            {
+                screenObj = new xRenderLine();
+            }
 
+            screenObj.render(this);
+
+            return screenObj;
+        }
     }
 }
