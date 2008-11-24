@@ -329,6 +329,7 @@ package x.lib {
          * @param value A value which will be appended to the base link of the HTML document.
          */
         public static function setValue(value:String):void {
+
             if (value == 'undefined' || value == null) value = '';
             value = _strictCheck(value, true);
             if (SWFAddress._value == value) return;

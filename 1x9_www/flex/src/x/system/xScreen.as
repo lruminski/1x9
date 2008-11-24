@@ -2,14 +2,14 @@ package x.system
 {
     import flash.display.DisplayObject;
 
-    import mx.containers.Canvas;
+    import mx.containers.VBox;
 
     import org.amqp.patterns.CorrelatedMessageEvent;
 
-    public class xScreen extends Canvas
+    public class xScreen extends VBox
     {
 
-        public var entry:xEntry;
+        public var entry:xRenderEntry;
 
         private var lines:Array;
         private var _lines:Array; // cache
@@ -24,6 +24,9 @@ package x.system
         {
             lines = new Array();
             current_line = 1;
+
+            entry = new xRenderEntry();
+            addChild(entry);
         }
 
         public function addConsole(console:xConsole):void
@@ -47,6 +50,9 @@ package x.system
             {
                 trace("render: ");
             }
+            entry.removeAllChildren();
+            entry = new xRenderEntry();
+            addChild(entry);
         }
 
         public function renderLine(event:CorrelatedMessageEvent):void
@@ -67,7 +73,7 @@ package x.system
                 line.obj = result.result;
                 display = line.render();
                 lines.push(line);
-                addChildAt(display, -1);
+                entry.addChild(display);
                 current_line++;
             }
         }

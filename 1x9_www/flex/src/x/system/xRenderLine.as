@@ -8,9 +8,11 @@ package x.system
         {
         }
 
-        public function render(obj:xEntryLine):void
+        public function render(entry_line:xEntryLine):void
         {
-            this.text = obj.val;
+            //var entry_line:xEntryLine = obj;
+
+            this.text = entry_line.obj.val;
         }
 
         public function moveUp():void

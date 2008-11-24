@@ -41,6 +41,7 @@ package x.system
 
         public function find(obj:Object, callback:Function):void
         {
+			trace("not here");
             conn.serv.send(type, "find", obj, callback)
         }
 

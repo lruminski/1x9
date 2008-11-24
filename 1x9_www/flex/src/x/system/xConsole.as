@@ -21,7 +21,6 @@ package x.system
 
             if (screen != null)
             {
-                screen.addConsole(this);
                 this.screen = screen;
 
                 var error:xError = xError.getInstance();
@@ -33,13 +32,15 @@ package x.system
         public function init():void {
             entry_line = new xEntryLine();
 
+            screen.addConsole(this);
+
             SWFAddress.onChange = handleAddress;
             input.addEventListener(Event.CHANGE, updateConsole)
             input.addEventListener(FlexEvent.ENTER, executeConsole);
         }
 
         public function get address():String {
-            return input.text;
+            return SWFAddress.getValue();
         }
 
         public function set address(value:String):void
@@ -69,14 +70,17 @@ package x.system
 
         private function executeConsole(event:FlexEvent):void
         {
-            if (is_entry())
+            trace("executeConsole: ");
+            if (is_entry()) {
+                trace("is entry");
                 entry_line.save(screen.renderLine);
+            }
 
-            if (is_addr())
+            if (is_addr() && address != input.text)
             {
+                address = input.text;
                 var entry:xEntry = new xEntry();
-                entry.find({addr: input.text}, screen.render)
-
+                entry.find({addr: address}, screen.render)
             }
 
             input.text = "";
@@ -85,7 +89,7 @@ package x.system
 
         public function is_addr():Boolean
         {
-            if (address.charAt() == "/") {
+            if (input.text.charAt() == "/") {
                 return true;
             } else {
                 return false;
