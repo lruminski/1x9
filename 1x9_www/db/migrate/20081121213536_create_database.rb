@@ -3,21 +3,6 @@ class CreateDatabase < ActiveRecord::Migration
   extend MigrationHelper
   def self.up
 
-    create_table "entry_words", :force => true do |t|
-      t.string    "val",                        :limit => 255, :default => "", :null => false
-      t.integer   "pos",                        :unsigned => true  
-      t.integer   "line_id",                    :unsigned => true
-      t.datetime  "created_at"
-      t.datetime  "updated_at"
-    end
-
-    create_table "entry_lines", :force => true do |t|
-      t.text      "val"
-      t.integer   "entry_id",                   :unsigned => true
-      t.datetime  "created_at"
-      t.datetime  "updated_at"
-    end
-    
     create_table "entries", :force => true do |t|
       t.text      "val"
       t.string    "addr",                       :limit => 255
@@ -25,6 +10,29 @@ class CreateDatabase < ActiveRecord::Migration
       t.datetime  "created_at"
       t.datetime  "updated_at"
     end
+
+    create_table "entry_lines", :force => true do |t|
+      t.text      "val"
+      t.integer   "entry_id",                   :unsigned => true
+      t.integer   "line_num",                   :unsigned => true
+      t.datetime  "created_at"
+      t.datetime  "updated_at"
+    end
+    add_foreign_key 'entry_lines', 'entry_id', 'entries', 'ON DELETE SET NULL'
+    
+    create_table "entry_words", :force => true do |t|
+      t.string    "val",                        :limit => 255, :default => "", :null => false
+      t.integer   "pos",                        :unsigned => true  
+      t.integer   "line_id",                    :unsigned => true
+      t.integer   "entry_id",                   :unsigned => true
+      t.integer   "line_num",                   :unsigned => true
+      t.datetime  "created_at"
+      t.datetime  "updated_at"
+    end
+    add_foreign_key 'entry_words', 'entry_id', 'entries', 'ON DELETE SET NULL'
+    add_foreign_key 'entry_words', 'line_id', 'entry_lines', 'ON DELETE CASCADE'
+    add_index "entry_words", ["entry_id", "line_num", "pos"], :name => "entry_id_line_num_pos", :unique => true
+    
     
     create_table "entry_header", :force => true do |t|
       t.integer   "entry_id",                   :unsigned => true
@@ -32,17 +40,22 @@ class CreateDatabase < ActiveRecord::Migration
       t.string    "type",                       :limit => 16
       t.integer   "location_id",                :unsigned => true
     end
+    add_foreign_key 'entry_header', 'entry_id', 'entries', 'ON DELETE CASCADE'
     
     create_table "entry_meta", :force => true do |t|
+      t.integer   "entry_id",                   :unsigned => true
+      t.integer   "meta_id",                    :unsigned => true      
       t.string    "type",                       :limit => 16
       t.string    "name",                       :limit => 16
       t.text      "val"
     end
+    add_foreign_key 'entry_meta', 'entry_id', 'entries', 'ON DELETE CASCADE'
     
     create_table "locations", :force => true do |t|
       t.string    "name",                       :limit => 32, :default => "", :null => false
       t.string    "address",                    :limit => 32, :default => "", :null => false
     end
+    add_index "locations", ["name", "address"], :name => "name_address", :unique => true
 
     create_table "groups", :force => true do |t|
       t.integer "location_id"                  

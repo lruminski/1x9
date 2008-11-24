@@ -4,9 +4,21 @@ package x.system
 
     public class xRenderEntry extends VBox
     {
-        public function xRenderEntry()
+        private var entry:xEntry;
+
+        public function xRenderEntry(entry:xEntry)
         {
+            this.entry = entry;
         }
 
+        public function render():void
+        {
+
+        }
+
+        public function addLine(line:xRenderLine):void
+        {
+            this.addChild(line);
+        }
     }
 }

@@ -33,26 +33,41 @@ ActiveRecord::Schema.define(:version => 20081121213536) do
     t.integer "location_id"
   end
 
+  add_index "entry_header", ["entry_id"], :name => "entry_id"
+
   create_table "entry_lines", :force => true do |t|
     t.text     "val"
     t.integer  "entry_id"
+    t.integer  "line_num"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  add_index "entry_lines", ["entry_id"], :name => "entry_id"
+
   create_table "entry_meta", :force => true do |t|
-    t.string "type", :limit => 16
-    t.string "name", :limit => 16
-    t.text   "val"
+    t.integer "entry_id"
+    t.integer "meta_id"
+    t.string  "type",     :limit => 16
+    t.string  "name",     :limit => 16
+    t.text    "val"
   end
+
+  add_index "entry_meta", ["entry_id"], :name => "entry_id"
 
   create_table "entry_words", :force => true do |t|
     t.string   "val",        :default => "", :null => false
     t.integer  "pos"
     t.integer  "line_id"
+    t.integer  "entry_id"
+    t.integer  "line_num"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "entry_words", ["entry_id", "line_num", "pos"], :name => "entry_id_line_num_pos", :unique => true
+  add_index "entry_words", ["entry_id"], :name => "entry_id"
+  add_index "entry_words", ["line_id"], :name => "line_id"
 
   create_table "groups", :force => true do |t|
     t.integer "location_id"
@@ -67,6 +82,8 @@ ActiveRecord::Schema.define(:version => 20081121213536) do
     t.string "name",    :limit => 32, :default => "", :null => false
     t.string "address", :limit => 32, :default => "", :null => false
   end
+
+  add_index "locations", ["name", "address"], :name => "name_address", :unique => true
 
   create_table "permissions", :force => true do |t|
     t.integer "group_id",                         :null => false

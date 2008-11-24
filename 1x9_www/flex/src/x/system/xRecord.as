@@ -22,14 +22,14 @@ package x.system
         public function set id(id:int):void
         {
             obj.id = id;
-            conn.serv.send(type, "show", obj, result)
+            conn.serv.send(type, "set", obj, result)
         }
 
         public function get id():int {
             if (obj.id) {
                 return obj.id;
             } else {
-                conn.serv.send(type, "create", obj, result)
+                conn.serv.send(type, "get", obj, result)
                 return -1;
             }
         }
@@ -41,7 +41,7 @@ package x.system
 
         public function find(obj:Object, callback:Function):void
         {
-			trace("not here");
+            trace("find:" + obj);
             conn.serv.send(type, "find", obj, callback)
         }
 

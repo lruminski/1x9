@@ -9,12 +9,13 @@ package x.system
     public class xScreen extends VBox
     {
 
-        public var entry:xRenderEntry;
+        public var display:DisplayObject;
 
+        private var entry:xEntry;
         private var lines:Array;
         private var _lines:Array; // cache
 
-        private var current_line:int;
+        //private var current_line:int;
 
         public function xScreen()
         {
@@ -23,10 +24,9 @@ package x.system
         public function init():void
         {
             lines = new Array();
-            current_line = 1;
 
-            entry = new xRenderEntry();
-            addChild(entry);
+            //display = new xRenderEntry(null);
+            //addChild(display);
         }
 
         public function addConsole(console:xConsole):void
@@ -39,42 +39,45 @@ package x.system
             var line:xEntryLine = new xEntryLine();
             line.obj.val = str;
             lines.push(line);
-            current_line++;
+            //current_line++;
             trace("show: " + str);
         }
 
-        public function render(event:CorrelatedMessageEvent):void
+        public function clearDisplay():void
         {
-            var result:Object = event.result
-            if (result != null)
+            if (display != null)
             {
-                trace("render: ");
+                display.removeAllChildren();
+                removeChild(display);
+                lines = new Array();
             }
-            entry.removeAllChildren();
-            entry = new xRenderEntry();
-            addChild(entry);
+        }
+
+        public function renderEntry(entry:xEntry):void
+        {
+            clearDisplay();
+
+            this.entry = entry;
+            display = new xRenderEntry(entry);
+            addChild(display);
         }
 
         public function renderLine(event:CorrelatedMessageEvent):void
         {
             var result:Object = event.result;
 
-            var display:DisplayObject;
+            var displayObj:DisplayObject;
 
             if (result != null)
             {
-                if (lines[current_line] != null)
-                {
-                    lines[current_line].moveUp();
-                }
 
                 trace("renderLine: ");
                 var line:xEntryLine = new xEntryLine();
                 line.obj = result.result;
-                display = line.render();
+                displayObj = line.render();
                 lines.push(line);
-                entry.addChild(display);
-                current_line++;
+                display.addLine(displayObj);
+                //current_line++;
             }
         }
 
