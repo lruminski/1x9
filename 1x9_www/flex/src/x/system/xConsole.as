@@ -37,7 +37,6 @@ package x.system
         }
 
         public function init():void {
-            current_line = 1;
 
             screen.addConsole(this);
 
@@ -49,6 +48,7 @@ package x.system
         public function set current_line(val:int):void {
             _current_line = val;
             entry_line = new xEntryLine();
+            entry_line.obj.entry_id = entry.obj.id;
             entry_line.obj.line_num = val;
         }
 
@@ -78,7 +78,8 @@ package x.system
             if (result != null)
             {
                 entry.obj = result.result;
-                entry_line.obj.entry_id = entry.obj.id;
+                // fix this: should be entry.num_lines + 1
+                current_line = 1;
             }
             screen.renderEntry(entry);
         }
