@@ -1,3 +1,6 @@
+# Writen by NuLayer
+# Modified with permission by 1X9
+
 SERV_LOG  = SERV_ROOT + '/log/serv.log'
 
 module Serv

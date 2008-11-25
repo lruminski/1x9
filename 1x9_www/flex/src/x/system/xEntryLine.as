@@ -2,6 +2,8 @@ package x.system
 {
     import flash.display.DisplayObject;
 
+    import org.amqp.patterns.CorrelatedMessageEvent;
+
 
     public class xEntryLine extends xEntry
     {
@@ -26,7 +28,8 @@ package x.system
             if (obj.val != entry_str)
             {
                 obj.val = entry_str;
-                conn.serv.send(type, "update_words", obj, doNothing);
+                trace("update_words: " + obj.id + " " + obj.val);
+                update(saveResult);
             }
         }
 
@@ -41,5 +44,6 @@ package x.system
 
             return screenObj;
         }
+
     }
 }

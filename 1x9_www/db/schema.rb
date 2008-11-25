@@ -62,10 +62,9 @@ ActiveRecord::Schema.define(:version => 20081121213536) do
     t.integer  "entry_id"
     t.integer  "line_num"
     t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
-  add_index "entry_words", ["entry_id", "line_num", "pos"], :name => "entry_id_line_num_pos", :unique => true
+  add_index "entry_words", ["entry_id", "line_num", "pos", "created_at"], :name => "entry_id_line_num_pos_created_at", :unique => true
   add_index "entry_words", ["entry_id"], :name => "entry_id"
   add_index "entry_words", ["line_id"], :name => "line_id"
 

@@ -37,9 +37,7 @@ package x.system
         }
 
         public function init():void {
-            entry_line = new xEntryLine();
             current_line = 1;
-
 
             screen.addConsole(this);
 
@@ -50,6 +48,7 @@ package x.system
 
         public function set current_line(val:int):void {
             _current_line = val;
+            entry_line = new xEntryLine();
             entry_line.obj.line_num = val;
         }
 
@@ -105,7 +104,7 @@ package x.system
             trace("executeConsole: ");
             if (is_entry()) {
                 trace("add line entry");
-                entry_line.save(screen.renderLine);
+                entry_line.show(screen.renderLine);
                 current_line++;
             }
 

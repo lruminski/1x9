@@ -34,27 +34,36 @@ package x.system
             }
         }
 
-        public function save(callback:Function):void
+        public function show(callback:Function = doNothing(event)):void
+        {
+            conn.serv.send(type, "show", obj, callback)
+        }
+
+        public function save(callback:Function = doNothing(event)):void
         {
             conn.serv.send(type, "save", obj, callback)
         }
 
+        public function update(callback:Function = doNothing(event)):void
+        {
+            conn.serv.send(type, "update", obj, callback);
+        }
+
+
         public function find(obj:Object, callback:Function):void
         {
-            trace("find:" + obj);
             conn.serv.send(type, "find", obj, callback)
         }
 
         public function doNothing(event:CorrelatedMessageEvent):void
         {
-            // nothing
+            // even nothing is something
         }
 
         public function saveResult(event:CorrelatedMessageEvent):void
         {
             var result:Object = event.result;
             if (result != null) {
-
                 obj = result.result;
             }
 

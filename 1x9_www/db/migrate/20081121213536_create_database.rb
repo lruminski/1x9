@@ -27,11 +27,10 @@ class CreateDatabase < ActiveRecord::Migration
       t.integer   "entry_id",                   :unsigned => true
       t.integer   "line_num",                   :unsigned => true
       t.datetime  "created_at"
-      t.datetime  "updated_at"
     end
     add_foreign_key 'entry_words', 'entry_id', 'entries', 'ON DELETE SET NULL'
     add_foreign_key 'entry_words', 'line_id', 'entry_lines', 'ON DELETE CASCADE'
-    add_index "entry_words", ["entry_id", "line_num", "pos"], :name => "entry_id_line_num_pos", :unique => true
+    add_index "entry_words", ["entry_id", "line_num", "pos", "created_at"], :name => "entry_id_line_num_pos_created_at", :unique => true
     
     
     create_table "entry_header", :force => true do |t|

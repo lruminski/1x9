@@ -1,3 +1,6 @@
+# Writen by NuLayer
+# Modified with permission by 1X9
+
 module Broker
   require "activesupport"
 

@@ -43,10 +43,11 @@ package x.system
 
         private function onPersonalConsume(event:CorrelatedMessageEvent):void
         {
-            var result = event.result
-
+            var result:Object;
+            result = event.result
+e
             if (result != null) {
-                screen.consume(result);
+                screen.consume(result.result);
             }
         }
 
