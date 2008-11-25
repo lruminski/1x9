@@ -13,13 +13,20 @@ class EntryController < Application
     entry = Entry.find(:first, :conditions => str)
     
     if entry.nil?
-      entry = Entry.new
-    end
+      entry = Entry.create record(params)
+    end    
     
     return entry
   end
   
-  def show
+  def render(id)
+    lines = EntryLine.find(:all, :conditions => ["entry_id", id], :group => "line_num", :order => "updated_at DESC");
+  end
+  
+  def get
+  end
+  
+  def set
   end
   
   def update
