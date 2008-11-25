@@ -26,7 +26,7 @@ package x.system
             if (obj.val != entry_str)
             {
                 obj.val = entry_str;
-                conn.serv.send(type, "update_words", entry_str, doNothing);
+                conn.serv.send(type, "update_words", obj, doNothing);
             }
         }
 

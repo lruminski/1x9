@@ -16,7 +16,7 @@ public function xInit(event:FlexEvent):void
 
     xscreen = new xScreen();
     xconsole = new xConsole(xscreen);
-    xnetwork = new xNetwork(Application.application.parameters.session_id);
+    xnetwork = new xNetwork(application.parameters.session_id, xscreen);
 
     addChild(xscreen);
 

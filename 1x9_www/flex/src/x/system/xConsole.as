@@ -21,14 +21,6 @@ package x.system
 
         // current_line
         private var _current_line:int;
-        public function set current_line(val:int):void {
-            _current_line = val;
-            entry_line.obj.line_num = val;
-        }
-        public function get current_line():int {
-            return _current_line;
-        }
-
 
         public function xConsole(screen:xScreen = null) {
 
@@ -56,14 +48,40 @@ package x.system
             input.addEventListener(FlexEvent.ENTER, executeConsole);
         }
 
+        public function set current_line(val:int):void {
+            _current_line = val;
+            entry_line.obj.line_num = val;
+        }
+
+        public function get current_line():int {
+            return _current_line;
+        }
+
+
         public function get address():String {
             return SWFAddress.getValue();
         }
 
         public function set address(value:String):void
         {
-            trace("set: " + value);
             SWFAddress.setValue(value);
+        }
+
+        public function loadEntry():void
+        {
+            entry = new xEntry();
+            entry.find({addr: address}, entryLoaded)
+        }
+
+        public function entryLoaded(event:CorrelatedMessageEvent):void
+        {
+            var result:Object = event.result
+            if (result != null)
+            {
+                entry.obj = result.result;
+                entry_line.obj.entry_id = entry.obj.id;
+            }
+            screen.renderEntry(entry);
         }
 
         private function handleAddress():void {
@@ -102,24 +120,7 @@ package x.system
 
         }
 
-        public function loadEntry():void
-        {
-            entry = new xEntry();
-            entry.find({addr: address}, entryLoaded)
-        }
-
-        public function entryLoaded(event:CorrelatedMessageEvent):void
-        {
-            var result:Object = event.result
-            if (result != null)
-            {
-                entry.obj = result.result;
-                entry_line.obj.entry_id = entry.obj.id;
-            }
-            screen.renderEntry(entry);
-        }
-
-        public function is_addr():Boolean
+        private function is_addr():Boolean
         {
             if (input.text.charAt() == "/") {
                 return true;
@@ -128,7 +129,7 @@ package x.system
             }
         }
 
-        public function is_entry():Boolean
+        private function is_entry():Boolean
         {
             if (!is_addr()) {
                 return true;

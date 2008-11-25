@@ -10,13 +10,15 @@ package x.system
     {
         private var comm:Network;
         private var session_id:String;
+        private var screen:xScreen;
 
-        public function xNetwork(session_id:String)
+        public function xNetwork(session_id:String, screen:xScreen)
         {
             comm = Network.getInstance();
             comm.addEventListener(Network.NETWORK_ERROR, handleError);
 
             this.session_id = session_id;
+            this.screen = screen;
         }
 
         public function init():void
@@ -41,7 +43,11 @@ package x.system
 
         private function onPersonalConsume(event:CorrelatedMessageEvent):void
         {
+            var result = event.result
 
+            if (result != null) {
+                screen.consume(result);
+            }
         }
 
         private function handleError(error:ErrorEvent):void
