@@ -3,7 +3,6 @@
 
 module Broker
   require "activesupport"
-
   module Base
     USERS_TOPIC = "users"
     

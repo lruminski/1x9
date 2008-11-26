@@ -85,5 +85,14 @@ package x.system
         {
             show(str);
         }
+
+        public function handleAction(msg:Object):void
+        {
+            var action:String = msg.action;
+            switch (action)
+            {
+                case "welcome":
+
+        }
     }
 }

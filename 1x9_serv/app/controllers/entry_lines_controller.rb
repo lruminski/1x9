@@ -8,7 +8,24 @@ class EntryLinesController < Application
   
   def show(params)
     params = record(params)
-    EntryLine.find(params[:id])
+    entry_line = EntryLine.find(params[:id])
+    
+    words = EntryWords.find(:all, :conditions => ['line_id = ?', entry_line[:id]], :order_by => 'created_at DESC')
+        
+    words.each do |word|
+      
+      if created_at.nil?
+        created_at = word[:created_at]
+      end
+      
+      Kernel::sleep [1, (word[:created_at]-created_at) / 4].min
+      
+      user_publish(@session.user_id, {
+        :action => 'renderWord',
+      })
+      
+    end
+        
   end
         
   def update(params)

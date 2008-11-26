@@ -45,9 +45,9 @@ package x.system
         {
             var result:Object;
             result = event.result
-e
+
             if (result != null) {
-                screen.consume(result.result);
+                screen.handleAction(result);
             }
         }
 
