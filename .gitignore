@@ -4,8 +4,6 @@
 .project
 .settings/*
 main.swf
-database.yml
-environment.rb
 config/mongrel_cluster.yml
 config/environments/*
 log/*
