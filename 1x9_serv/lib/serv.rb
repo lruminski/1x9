@@ -11,7 +11,7 @@ module Serv
         Serv::Log.info "=> Serv initializing"
         
         initialize_paths
-        #initialize_database
+        initialize_database
         initialize_broker
         
       end
@@ -30,7 +30,6 @@ module Serv
       # Open a connection with the database
       def initialize_database
         Serv::Log.info "-> Connecting to database"
-        ActiveRecord::Base.allow_concurrency = true
         ActiveRecord::Base.establish_connection(Configuration::database_configuration)
       end
       

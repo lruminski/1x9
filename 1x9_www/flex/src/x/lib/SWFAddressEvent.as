@@ -9,8 +9,7 @@
 package x.lib {
 
     import flash.events.Event;
-    import SWFAddress;
-
+    
     /**
      * Event class for SWFAddress.
      */

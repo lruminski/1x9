@@ -20,7 +20,7 @@ package x.system
 
             obj.line_num = num;
 
-            words = new Array("");
+            //words = new Array("");
         }
 
         public function update_words(entry_str:String):void
