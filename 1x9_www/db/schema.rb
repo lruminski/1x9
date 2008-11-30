@@ -74,8 +74,8 @@ ActiveRecord::Schema.define(:version => 20081121213536) do
     t.boolean "disabled",                  :default => false
   end
 
-  add_index "groups", ["name"], :name => "name", :unique => true
   add_index "groups", ["location_id"], :name => "location_id"
+  add_index "groups", ["name"], :name => "name", :unique => true
 
   create_table "locations", :force => true do |t|
     t.string "name",    :limit => 32, :default => "", :null => false
@@ -93,9 +93,9 @@ ActiveRecord::Schema.define(:version => 20081121213536) do
     t.boolean "access_delete", :default => false
   end
 
+  add_index "permissions", ["controller_id"], :name => "controller_id"
   add_index "permissions", ["group_id", "controller_id"], :name => "group_id_controller_id", :unique => true
   add_index "permissions", ["group_id"], :name => "group_id"
-  add_index "permissions", ["controller_id"], :name => "controller_id"
 
   create_table "sessions", :force => true do |t|
     t.string   "session_id", :null => false
@@ -119,7 +119,7 @@ ActiveRecord::Schema.define(:version => 20081121213536) do
     t.boolean  "disabled",                    :default => false
   end
 
-  add_index "users", ["username"], :name => "username", :unique => true
   add_index "users", ["group_id"], :name => "group_id"
+  add_index "users", ["username"], :name => "username", :unique => true
 
 end

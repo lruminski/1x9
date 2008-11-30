@@ -16,7 +16,7 @@ package x.lib {
     import flash.system.Capabilities;
     import flash.utils.clearInterval;
     import flash.utils.setInterval;
-    import SWFAddressEvent;
+    import x.lib.SWFAddress;
 
     /**
      * SWFAddress is distributed as a top level class. Projects that utilize

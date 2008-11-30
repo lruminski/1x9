@@ -1,9 +1,9 @@
 package x.system
 {
     import flash.events.ErrorEvent;
-
+    
     import org.amqp.patterns.CorrelatedMessageEvent;
-
+    
     import x.lib.Network;
 
     public class xNetwork
@@ -33,8 +33,7 @@ package x.system
             var result:* = event.result.result;
 
             if (result) {
-                authObj = result;
-                comm.serv.setToken(authObj.token);
+                comm.serv.setToken(result.token);
             }else {
                 var error:xError = xError.getInstance();
                 error.display("RPC Connection Failed");

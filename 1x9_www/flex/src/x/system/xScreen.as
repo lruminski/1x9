@@ -1,15 +1,15 @@
 package x.system
 {
     import flash.display.DisplayObject;
-
+    
     import mx.containers.VBox;
-
+    
     import org.amqp.patterns.CorrelatedMessageEvent;
 
     public class xScreen extends VBox
     {
 
-        public var display:DisplayObject;
+        public var display:xRenderEntry;
 
         private var entry:xEntry;
         private var lines:Array;
@@ -92,7 +92,7 @@ package x.system
             switch (action)
             {
                 case "welcome":
-
+            }
         }
     }
 }

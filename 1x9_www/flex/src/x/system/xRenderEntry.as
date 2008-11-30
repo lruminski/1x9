@@ -1,5 +1,7 @@
 package x.system
 {
+    import flash.display.DisplayObject;
+    
     import mx.containers.VBox;
 
     public class xRenderEntry extends VBox
@@ -16,7 +18,7 @@ package x.system
 
         }
 
-        public function addLine(line:xRenderLine):void
+        public function addLine(line:DisplayObject):void
         {
             this.addChild(line);
         }

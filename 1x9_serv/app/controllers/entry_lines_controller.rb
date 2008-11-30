@@ -10,19 +10,20 @@ class EntryLinesController < Application
     params = record(params)
     entry_line = EntryLine.find(params[:id])
     
-    words = EntryWords.find(:all, :conditions => ['line_id = ?', entry_line[:id]], :order_by => 'created_at DESC')
-        
+    words = EntryWord.find(:all, :conditions => ['line_id = ?', entry_line[:id]], :order => 'created_at')
+
+    created_at = nil    
     words.each do |word|
       
       if created_at.nil?
-        created_at = word[:created_at]
+        created_at = word['created_at']
       end
       
-      Kernel::sleep [1, (word[:created_at]-created_at) / 4].min
+      #Kernel::sleep [1, (word['created_at']-created_at) / 4].min
       
-      user_publish(@session.user_id, {
-        :action => 'renderWord',
-      })
+      #user_publish(@session.user_id, {
+      #  :action => 'renderWord',
+      #})
       
     end
         
@@ -33,6 +34,7 @@ class EntryLinesController < Application
     
     if params[:id].nil?
       entry_line = save(params)
+      entry_line[:val] = ''
     else
       entry_line = EntryLine.find(params[:id])
     end
