@@ -67,8 +67,17 @@ package x.system
         public function saveResult(event:CorrelatedMessageEvent):void
         {
             var result:Object = event.result;
-            if (result != null) {
+        	trace ("saveResult[:" + type + "]");
+
+
+        	 
+        	if (result != null) {
+        		//var tmp:Array = result.result;
+        	
                 obj = result.result;
+	        	for (var key:String in obj) {
+	        		 trace (key + " => " + obj[key]);
+	        	}
             }
 
         }

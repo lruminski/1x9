@@ -19,11 +19,13 @@ class EntryLinesController < Application
         created_at = word['created_at']
       end
       
-      #Kernel::sleep [1, (word['created_at']-created_at) / 4].min
+      Kernel::sleep [1, (word['created_at']-created_at) / 4].min
       
-      #user_publish(@session.user_id, {
-      #  :action => 'renderWord',
-      #})
+      puts 'user_publish[:renderWord] ' + @session.session_id.to_s
+      user_publish(@session.session_id, {
+        :action => 'renderWord',
+        :obj => word
+      })
       
     end
         

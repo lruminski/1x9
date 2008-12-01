@@ -1,12 +1,13 @@
 package x.system
 {
     import flash.events.Event;
-
+    
+	import mx.controls.Alert;
     import mx.controls.TextInput;
     import mx.events.FlexEvent;
-
+    
     import org.amqp.patterns.CorrelatedMessageEvent;
-
+    
     import x.lib.SWFAddress;
 
     public class xConsole
@@ -80,8 +81,12 @@ package x.system
                 entry.obj = result.result;
                 // fix this: should be entry.num_lines + 1
                 current_line = 1;
+	            screen.renderEntry(entry);
             }
-            screen.renderEntry(entry);
+            else
+            {
+            	Alert.show("connection failed");
+            }
         }
 
         private function handleAddress():void {

@@ -2,8 +2,6 @@ package x.system
 {
     import flash.display.DisplayObject;
 
-    import org.amqp.patterns.CorrelatedMessageEvent;
-
 
     public class xEntryLine extends xEntry
     {
@@ -25,6 +23,11 @@ package x.system
 
         public function update_words(entry_str:String):void
         {
+        	if (obj == null)
+        	{
+        		obj = new Object;
+        	}
+        	
             if (obj.val != entry_str)
             {
                 obj.val = entry_str;

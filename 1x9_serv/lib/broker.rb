@@ -133,12 +133,14 @@ module Broker
     # Publish data to the game topic
     def gamex_publish(key, data)
       @game_mq.publish(data.to_json, { :key => key, :correlation_id => key })
+      puts "[GAMEX_PUBLISH] - [key: #{key} data: #{data.to_s}]"
     end
     
     # Publish data to the user topic
     def user_publish(user_id, data)
       key = Broker::Base::USERS_TOPIC+'.'+user_id.to_s
       gamex_publish(key, data)
+      puts "[USER_PUBLISH] - [user_id: #{user_id} data: #{data.to_s}]"
     end
   end
   

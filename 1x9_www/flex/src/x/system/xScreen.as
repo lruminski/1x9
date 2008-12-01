@@ -89,6 +89,7 @@ package x.system
         public function handleAction(msg:Object):void
         {
             var action:String = msg.action;
+            trace ("handleAction: " + action);
             switch (action)
             {
                 case "welcome":
