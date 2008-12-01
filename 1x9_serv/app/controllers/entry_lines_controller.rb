@@ -19,16 +19,18 @@ class EntryLinesController < Application
         created_at = word['created_at']
       end
       
-      Kernel::sleep [1, (word['created_at']-created_at) / 4].min
-      
-      puts 'user_publish[:renderWord] ' + @session.session_id.to_s
-      user_publish(@session.session_id, {
-        :action => 'renderWord',
-        :obj => word
-      })
+      ### Grrrr.. can't publish
+      #Kernel::sleep [1, (word['created_at']-created_at) / 4].min
+      #      
+      #puts 'publish[:renderWord] ' + @session.session_id.to_s
+      #user_publish(@session.session_id, {
+      #  :action => 'renderWord',
+      #  :obj => word
+      #})
       
     end
-        
+    result = {:entry_line => entry_line, :words => words}
+    return result
   end
         
   def update(params)

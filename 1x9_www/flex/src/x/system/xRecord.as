@@ -76,7 +76,7 @@ package x.system
         	
                 obj = result.result;
 	        	for (var key:String in obj) {
-	        		 trace (key + " => " + obj[key]);
+	        		 trace ("  " + key + " => " + obj[key]);
 	        	}
             }
 

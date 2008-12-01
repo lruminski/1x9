@@ -1,0 +1,67 @@
+/* CSS file */
+
+@font-face {
+    /*src:url("assets/maritam.ttf");*/
+    /*src:local("Marita Medium - HMK");*/
+    src:local("Monaco");
+    fontFamily: main;
+    fontWeight: normal;
+
+    unicodeRange: U+0020-U+007E;
+}
+
+global {
+    /*modalTransparencyBlur: 10;*/
+    modalTransparency: 0.5;
+    modalTransparencyDuration: 750;
+    themeColor: #ffffcc;
+    fontFamily: main;
+    fontSize: 11;
+    fontColor: #000000;
+}
+
+Panel {
+   cornerRadius: 7;
+   highlightAlphas: 0.5, 0;
+   shadowDistance: 3;
+}
+
+Application {
+    backgroundGradientAlphas: 0, 0;
+}
+
+TextInput {
+   /*borderStyle: solid;*/
+   cornerRadius: 7;
+   paddingLeft: 5;
+   /*dropShadowEnabled: true;*/
+   /*shadowDistance: 3;*/
+}
+
+Button {
+   cornerRadius: 7;
+   paddingBottom: 3;
+   highlightAlphas: 0, 0;
+   fillAlphas: 1, 1, 1, 1;
+   fillColors: #ffffff, #ffffff, #dddddd, #dddddd;
+   color: #333333;
+   textRollOverColor: #000000;
+   textSelectedColor: #000000;
+   borderColor: #999999;
+   themeColor: #999999;
+   fontSize: 14;
+   fontWeight: normal;
+}
+
+Alert {
+   fontSize: 16;
+   color: #000000;
+}
+
+ToolTip {
+    font-size: 16;
+    color: #000000;
+    cornerRadius: 7;
+    background-color: #FFFFFF;
+    background-alpha: 0.85;
+}

@@ -2,7 +2,7 @@ package x.lib
 {
     import flash.events.ErrorEvent;
     import flash.events.EventDispatcher;
-
+    
     import org.amqp.Connection;
     import org.amqp.ConnectionParameters;
     import org.amqp.error.ConnectionError;
@@ -84,34 +84,19 @@ package x.lib
             return serv.getReplyQueue();
         }
 
-        // Subscribe a user to a personal topic
-        public function user_subscribe(key:*, callback:Function):void {
-            env.subscribe(USERS_TOPIC+"."+key.toString(), callback);
+        // Subscribe to a topic
+        public function subscripe(topic:String, key:*, callback:Function):void {
+            env.subscribe(topic+"."+key.toString(), callback);
         }
 
-        // Unsubscribe from a user topic
-        public function user_unsubscribe(key:*, callback:Function):void {
-            env.unsubscribe(USERS_TOPIC+"."+key.toString());
+        // Unsubscribe from a topic
+        public function unsubscripe(topic:String, key:*):void {
+            env.unsubscribe(topic+"."+key.toString());
         }
 
-        // Publish data to a specific user topic
-        public function user_publish(key:*, o:*):void {
-            env.publish(USERS_TOPIC+"."+key.toString(), o);
-        }
-
-        // Subscribe to a map topic
-        public function map_subscribe(key:*, callback:Function):void {
-            env.subscribe(world+"."+key.toString(), callback);
-        }
-
-        // Unsubscribe from a map topic
-        public function map_unsubscribe(key:*):void {
-            env.unsubscribe(world+"."+key.toString());
-        }
-
-        // Publish data to a specific map topic
-        public function map_publish(key:*, o:*):void {
-            env.publish(world+"."+key.toString(), o);
+        // Publish data to a specific topic
+        public function publish(topic:String, key:*, o:*):void {
+            env.publish(topic+"."+key.toString(), o);
         }
 
         // Setup a listener for any presence notification

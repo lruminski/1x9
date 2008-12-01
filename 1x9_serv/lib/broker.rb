@@ -4,7 +4,6 @@
 module Broker
   require "activesupport"
   module Base
-    USERS_TOPIC = "users"
     
     class << self
       def start!(config)
@@ -136,11 +135,10 @@ module Broker
       puts "[GAMEX_PUBLISH] - [key: #{key} data: #{data.to_s}]"
     end
     
-    # Publish data to the user topic
-    def user_publish(user_id, data)
-      key = Broker::Base::USERS_TOPIC+'.'+user_id.to_s
+    # Publish data to the topic
+    def publish(topic, entry_id, data)
+      key = topic+'.'+entry_id
       gamex_publish(key, data)
-      puts "[USER_PUBLISH] - [user_id: #{user_id} data: #{data.to_s}]"
     end
   end
   

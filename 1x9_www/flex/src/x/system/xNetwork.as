@@ -23,7 +23,6 @@ package x.system
 
         public function init():void
         {
-        	trace("connecting to session " + session_id);
             comm.connect("guest", "guest", "/", "localhost");
             comm.authenticate(session_id, onAuthenticate);
         }
@@ -33,22 +32,18 @@ package x.system
             var result:* = event.result.result;
 
             if (result) {
-            	trace("setToken: " + result.token);
                 comm.serv.setToken(result.token);
+	            comm.subscripe("user", session_id, onPersonalConsume);
             }else {
                 var error:xError = xError.getInstance();
                 error.display("RPC Connection Failed");
             }
-            
-            comm.user_subscribe(session_id, onPersonalConsume);
-            
         }
 
         private function onPersonalConsume(event:CorrelatedMessageEvent):void
         {
             var result:Object;
             result = event.result
-            trace("personalConsume: ");
 
             if (result != null) {
                 screen.handleAction(result);
