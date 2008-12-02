@@ -70,14 +70,22 @@ package x.system
 
             if (result != null)
             {
-
-                trace("renderLine: ");
-                var line:xEntryLine = new xEntryLine();
-                line.obj = result.result;
-                displayObj = line.render();
-                lines.push(line);
-                display.addLine(displayObj);
-                //current_line++;
+            	/*
+				if (result.result.words == null)
+				{
+	                trace("renderLine: ");
+	                var line:xEntryLine = new xEntryLine();
+	                line.obj = result.result.entry_line;
+	                displayObj = line.render();
+	                lines.push(line);
+	                display.addLine(displayObj);
+	                //current_line++;
+	   			}
+	   			else
+	   			{
+	   				trace("renderWords: ");
+	   			}
+	   			*/
             }
         }
 

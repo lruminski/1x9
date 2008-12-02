@@ -7,6 +7,7 @@ package x.system
     {
 
         public var screenObj:xRenderLine;
+        private var entry:xEntry;
 
         public function xEntryLine(num:int = 0, id:int = -1, entry:xEntry = null, type:String = "entry_lines")
         {
@@ -14,6 +15,7 @@ package x.system
             {
                 entry = new xEntry();
             }
+            this.entry = entry;
             super(entry.id, type);
 
             obj.line_num = num;
@@ -36,17 +38,19 @@ package x.system
             }
         }
 
+		/*
         public function render():DisplayObject
         {
             if (screenObj == null)
             {
-                screenObj = new xRenderLine();
+                screenObj = new xRenderLine(entry);
             }
 
             screenObj.render(this);
 
             return screenObj;
         }
+        */
 
     }
 }

@@ -32,9 +32,11 @@ package x.system
             var result:* = event.result.result;
 
             if (result) {
+            	trace("authenticated");
                 comm.serv.setToken(result.token);
-	            comm.subscripe("user", session_id, onPersonalConsume);
+	            comm.subscribe("user", session_id, onPersonalConsume);
             }else {
+            	trace("connection failed");
                 var error:xError = xError.getInstance();
                 error.display("RPC Connection Failed");
             }

@@ -45,6 +45,7 @@ package x.lib
         }
 
         public function send(controller:String, action:String, params:*, callback:Function):void {
+        	
             rpc.send({
                 session_id:sessionKey,
                 controller:controller,

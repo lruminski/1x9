@@ -20,7 +20,27 @@ class EntryController < Application
   end
   
   def render(id)
-    lines = EntryLine.find(:all, :conditions => ["entry_id", id], :group => "line_num", :order => "updated_at DESC");
+    #lines = EntryLine.find(:all, :conditions => ["entry_id", id], :group => "line_num", :order => "updated_at DESC");
+    words = EntryWord.find(:all, :conditions => ['entry_id = ?', id], :order => 'created_at')
+
+    created_at = nil    
+    words.each do |word|
+      
+      if created_at.nil?
+        created_at = word['created_at']
+      end
+      
+      ### Grrrr.. can't publish
+      #Kernel::sleep [1, (word['created_at']-created_at) / 4].min
+      #      
+      #puts 'publish[:renderWord] ' + @session.session_id.to_s
+      publish('entry', 'test', {
+        :action => 'renderWord',
+        :obj => word
+      })
+      
+    end
+    
   end
   
   def get
