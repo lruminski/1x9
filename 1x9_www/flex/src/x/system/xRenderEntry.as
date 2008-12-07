@@ -15,21 +15,17 @@ package x.system
 
         public function xRenderEntry(entry:xEntry = null)
         {
-<<<<<<< HEAD:1x9_www/flex/src/x/system/xRenderEntry.as
             
             if (entry != null)
             {
 	            this.entry = entry;
 	            render()
 	       	}
-=======
-            this.entry = entry;
             
             comm = Network.getInstance();            
-            comm.subscribe("entry", "test", consumeEntry);
+            //comm.subscribe("entry", "test", consumeEntry);
             //comm.subscribe("entry", entry.obj.id, consumeEntry);
-            comm.serv.send("entry", "render", entry.obj.id, doNothing);
->>>>>>> d48e805d3c2fc3ae44eff31bd83661076ecb0b8e:1x9_www/flex/src/x/system/xRenderEntry.as
+            //comm.serv.send("entry", "render", entry.obj.id, doNothing);
         }
 
         public function render():void

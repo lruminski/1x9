@@ -19,6 +19,7 @@ package x.system
         private var _lines:Array; // cache
         
         private var setting:xSetting;
+		private var console:xConsole;
 
         //private var current_line:int;
 
@@ -42,6 +43,7 @@ package x.system
 
         public function addConsole(console:xConsole):void
         {
+        	this.console = console;
             this.addChild(console.input);
         }
 
@@ -87,7 +89,6 @@ package x.system
 
             if (result != null)
             {
-<<<<<<< HEAD:1x9_www/flex/src/x/system/xScreen.as
 
                 trace("renderLine: ");
                 
@@ -142,7 +143,6 @@ package x.system
                 	
 	           }
                 //current_line++;
-=======
             	/*
 				if (result.result.words == null)
 				{
@@ -159,7 +159,6 @@ package x.system
 	   				trace("renderWords: ");
 	   			}
 	   			*/
->>>>>>> d48e805d3c2fc3ae44eff31bd83661076ecb0b8e:1x9_www/flex/src/x/system/xScreen.as
             }
         }
 

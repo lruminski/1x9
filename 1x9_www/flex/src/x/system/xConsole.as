@@ -80,7 +80,8 @@ package x.system
             {
                 entry.obj = result.result;
                 // fix this: should be entry.num_lines + 1
-                current_line = 1;
+                current_line = entry.obj.num_lines + 1;
+                trace("setting current line to: " + current_line);
 	            screen.renderEntry(entry);
             }
             else
