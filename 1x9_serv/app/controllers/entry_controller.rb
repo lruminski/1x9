@@ -21,8 +21,33 @@ class EntryController < Application
     return entry
   end
   
+<<<<<<< HEAD:1x9_serv/app/controllers/entry_controller.rb
   def show(id)
     lines = EntryLine.find(:all, :conditions => ["entry_id", id], :group => "line_num", :order => "updated_at DESC");
+=======
+  def render(id)
+    #lines = EntryLine.find(:all, :conditions => ["entry_id", id], :group => "line_num", :order => "updated_at DESC");
+    words = EntryWord.find(:all, :conditions => ['entry_id = ?', id], :order => 'created_at')
+
+    created_at = nil    
+    words.each do |word|
+      
+      if created_at.nil?
+        created_at = word['created_at']
+      end
+      
+      ### Grrrr.. can't publish
+      #Kernel::sleep [1, (word['created_at']-created_at) / 4].min
+      #      
+      #puts 'publish[:renderWord] ' + @session.session_id.to_s
+      publish('entry', 'test', {
+        :action => 'renderWord',
+        :obj => word
+      })
+      
+    end
+    
+>>>>>>> d48e805d3c2fc3ae44eff31bd83661076ecb0b8e:1x9_serv/app/controllers/entry_controller.rb
   end
   
   def get

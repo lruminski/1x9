@@ -29,6 +29,7 @@ package x.lib
 
         // Subscribes to a room
         public function subscribe(key:String, callback:Function):void {
+        	trace ("subscribing to " + key);
             sub.subscribe(key, callback);
         }
 

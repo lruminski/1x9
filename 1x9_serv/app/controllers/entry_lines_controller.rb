@@ -30,7 +30,7 @@ class EntryLinesController < Application
       #  :obj => word
       #})
     end
-    result = {:entry_line => entry_line, :words => words}
+    result = {:entry_line => entry_line}#, :words => words}
     return result
   end
         

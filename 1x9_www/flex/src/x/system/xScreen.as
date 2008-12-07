@@ -87,6 +87,7 @@ package x.system
 
             if (result != null)
             {
+<<<<<<< HEAD:1x9_www/flex/src/x/system/xScreen.as
 
                 trace("renderLine: ");
                 
@@ -141,6 +142,24 @@ package x.system
                 	
 	           }
                 //current_line++;
+=======
+            	/*
+				if (result.result.words == null)
+				{
+	                trace("renderLine: ");
+	                var line:xEntryLine = new xEntryLine();
+	                line.obj = result.result.entry_line;
+	                displayObj = line.render();
+	                lines.push(line);
+	                display.addLine(displayObj);
+	                //current_line++;
+	   			}
+	   			else
+	   			{
+	   				trace("renderWords: ");
+	   			}
+	   			*/
+>>>>>>> d48e805d3c2fc3ae44eff31bd83661076ecb0b8e:1x9_www/flex/src/x/system/xScreen.as
             }
         }
 

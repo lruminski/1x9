@@ -85,12 +85,12 @@ package x.lib
         }
 
         // Subscribe to a topic
-        public function subscripe(topic:String, key:*, callback:Function):void {
+        public function subscribe(topic:String, key:*, callback:Function):void {
             env.subscribe(topic+"."+key.toString(), callback);
         }
 
         // Unsubscribe from a topic
-        public function unsubscripe(topic:String, key:*):void {
+        public function unsubscribe(topic:String, key:*):void {
             env.unsubscribe(topic+"."+key.toString());
         }
 
