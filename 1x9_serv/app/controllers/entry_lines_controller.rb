@@ -16,8 +16,10 @@ class EntryLinesController < Application
     words.each do |word|
       
       if created_at.nil?
-        created_at = word['created_at']
+        created_at = word['created_at']        
       end
+      
+      word['time_elapsed'] = time_elapsed = word['created_at']-created_at;
       
       ### Grrrr.. can't publish
       #Kernel::sleep [1, (word['created_at']-created_at) / 4].min
@@ -27,7 +29,6 @@ class EntryLinesController < Application
       #  :action => 'renderWord',
       #  :obj => word
       #})
-      
     end
     result = {:entry_line => entry_line, :words => words}
     return result
@@ -43,6 +44,13 @@ class EntryLinesController < Application
       entry_line = EntryLine.find(params[:id])
     end
     entry_line.update_words(params[:val])
+
+    if entry_line.frozen?
+      puts "frozen"
+      entry_line = EntryLine.find(:first, :conditions => ["entry_id = ? AND line_num = ?", params[:entry_id], params[:line_num]])
+      entry_line.val = params[:val]
+    end
+
     entry_line.save
     return entry_line
   end

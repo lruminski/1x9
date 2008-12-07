@@ -14,7 +14,7 @@ global {
     /*modalTransparencyBlur: 10;*/
     modalTransparency: 0.5;
     modalTransparencyDuration: 750;
-    themeColor: #ffffcc;
+    themeColor: #b7babc;
     fontFamily: main;
     fontSize: 11;
     fontColor: #000000;
@@ -31,11 +31,16 @@ Application {
 }
 
 TextInput {
-   /*borderStyle: solid;*/
-   cornerRadius: 7;
-   paddingLeft: 5;
-   /*dropShadowEnabled: true;*/
-   /*shadowDistance: 3;*/
+   borderStyle: solid;
+   cornerRadius: 11;
+   textAlign: "center";
+}
+
+Text {
+	fontSize: 18;
+	fontFamily: "Century Gothic";
+	fontWeight: "bold";
+	color: #000000;
 }
 
 Button {

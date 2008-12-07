@@ -136,8 +136,8 @@ module Broker
     end
     
     # Publish data to the topic
-    def publish(topic, entry_id, data)
-      key = topic+'.'+entry_id
+    def publish(topic, key, data)
+      key = topic+'.'+key
       gamex_publish(key, data)
     end
   end

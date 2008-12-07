@@ -1,5 +1,8 @@
 package x.system
 {
+    import flash.events.TimerEvent;
+    import flash.utils.Timer;
+    
     import org.amqp.patterns.CorrelatedMessageEvent;
     
     import x.lib.Network;
@@ -10,6 +13,9 @@ package x.system
         public var type:String;
 
         public var obj:Object;
+        
+        private var interval:Timer;
+        private var callback:Function;
 
         public function xRecord(id:int = -1, type:String = "entry")
         {
@@ -18,7 +24,8 @@ package x.system
             obj = new Object();
             obj.id = id;
         }
-
+		
+		
         public function set id(id:int):void
         {
             obj.id = id;
@@ -33,11 +40,28 @@ package x.system
                 return -1;
             }
         }
+        
 
         public function show(callback:Function):void
         {
-        	callback = setDefaultCallback(callback, doNothing);
-            conn.serv.send(type, "show", obj, callback)
+        	if (this.obj.id > 0)
+        	{        	
+	        	callback = setDefaultCallback(callback, doNothing);
+	            conn.serv.send(type, "show", obj, callback)
+	       	} else {
+	       		interval = new Timer(250, 5);
+	       		interval.addEventListener(TimerEvent.TIMER, reShow);
+	       		this.callback = callback;
+	       		interval.start();
+	       	}
+        }
+        
+        private function reShow(event:TimerEvent):void
+        {        	
+        	if (this.obj.id > 0) {
+        		interval.stop();
+	        	show(callback);	        	        	
+        	}
         }
 
         public function save(callback:Function):void
@@ -48,7 +72,7 @@ package x.system
 
         public function update(callback:Function):void
         {
-            callback = setDefaultCallback(callback, doNothing);
+            callback = setDefaultCallback(callback, saveResult);
             conn.serv.send(type, "update", obj, callback);
         }
 

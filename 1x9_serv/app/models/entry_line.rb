@@ -55,11 +55,20 @@ class EntryLine < ActiveRecord::Base
     puts "new words: " + words_new.to_s + ", " + old_count.to_s + ", " + str.split(" ").to_s + ", " + words_old.to_s
     words_new.each_with_index do |word, idx|
       puts "add: " + word
-      EntryWord.create :val => word, :entry_id => self.entry_id,  :line_id => self.id, :pos => old_count+idx, :line_num => self.line_num
+      #still getting duplicate (when )
+      begin
+        EntryWord.create :val => word, :entry_id => self.entry_id, :line_id => self.id, :pos => old_count+idx, :line_num => self.line_num
+      rescue
+        puts "destrying"
+        self.destroy
+      end
+
     end
     
-    self.val = str
-    self.save
+    if !self.frozen?
+      self.val = str
+      self.save
+    end
   end
   
 end

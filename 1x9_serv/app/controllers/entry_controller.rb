@@ -14,12 +14,14 @@ class EntryController < Application
     
     if entry.nil?
       entry = Entry.create record(params)
+    #else 
+    #  entry_words = EntryWord.find(:all, :conditions => ["entry"])
     end    
     
     return entry
   end
   
-  def render(id)
+  def show(id)
     lines = EntryLine.find(:all, :conditions => ["entry_id", id], :group => "line_num", :order => "updated_at DESC");
   end
   

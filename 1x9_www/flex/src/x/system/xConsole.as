@@ -26,7 +26,7 @@ package x.system
         public function xConsole(screen:xScreen = null) {
 
             input = new TextInput()
-            this.input = input;
+            input.percentWidth = 100;
 
             if (screen != null)
             {

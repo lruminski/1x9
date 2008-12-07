@@ -6,9 +6,9 @@ package x.system
     public class xEntryLine extends xEntry
     {
 
-        public var screenObj:xRenderLine;
+        public var renderObj:xRenderLine;
 
-        public function xEntryLine(num:int = 0, id:int = -1, entry:xEntry = null, type:String = "entry_lines")
+        public function xEntryLine(num:int = 0, id:int = -1, val:String = "", entry:xEntry = null, type:String = "entry_lines")
         {
             if (entry == null)
             {
@@ -17,7 +17,8 @@ package x.system
             super(entry.id, type);
 
             obj.line_num = num;
-
+            obj.val = val;
+            
             //words = new Array("");
         }
 
@@ -35,17 +36,24 @@ package x.system
                 update(saveResult);
             }
         }
+        
+        public function update_word(val:String, pos:int):void
+        {
+        	var words:Array = (this.obj.val as String).split(" ");
+        	words[pos] = val;
+        	this.obj.val = words.join(" ");
+        }
 
         public function render():DisplayObject
         {
-            if (screenObj == null)
+            if (renderObj == null)
             {
-                screenObj = new xRenderLine();
+                renderObj = new xRenderLine();
             }
 
-            screenObj.render(this);
+            renderObj.render(this);
 
-            return screenObj;
+            return renderObj;
         }
 
     }

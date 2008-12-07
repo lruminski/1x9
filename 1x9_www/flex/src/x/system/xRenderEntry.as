@@ -8,14 +8,22 @@ package x.system
     {
         private var entry:xEntry;
 
-        public function xRenderEntry(entry:xEntry)
+        public function xRenderEntry(entry:xEntry = null)
         {
-            this.entry = entry;
+            
+            if (entry != null)
+            {
+	            this.entry = entry;
+	            render()
+	       	}
         }
 
         public function render():void
         {
-
+			for (var word:* in entry.obj.entry_lines)
+			{
+				
+			}
         }
 
         public function addLine(line:DisplayObject):void
