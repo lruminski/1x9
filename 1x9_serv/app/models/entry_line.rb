@@ -3,7 +3,7 @@ class EntryLine < ActiveRecord::Base
   has_many      :entry_word
   
   before_save   :is_entry
-  
+
   def is_entry
     if self.entry_id.nil?
       entry = Entry.create
@@ -12,7 +12,18 @@ class EntryLine < ActiveRecord::Base
   end
   
   def words
-    entry_word = EntryWord.find(:all, :conditions => {:line_id => self.id}, :order => 'created_at')
+    words = EntryWord.find(:all, :conditions => {:line_id => self.id}, :order => 'created_at')
+    
+    if !words.first.nil?
+      created_at = words.first[:created_at]
+    end
+    
+    words.each do |word|
+      word.instance_variable_set(:@time_elapsed, word[:created_at]-created_at)
+      created_at = word[:created_at]
+    end
+    
+    @words = words
   end
   
   def update_words(str)

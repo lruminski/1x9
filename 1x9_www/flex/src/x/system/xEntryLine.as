@@ -2,10 +2,8 @@ package x.system
 {
     import flash.display.DisplayObject;
 
-
     public class xEntryLine extends xEntry
     {
-
         public var renderObj:xRenderLine;
         private var entry:xEntry;
 
@@ -47,7 +45,7 @@ package x.system
         }
 
 		
-        public function render():DisplayObject
+        public function render(delay:Number = 0):DisplayObject
         {
             if (renderObj == null)
             {
@@ -57,6 +55,7 @@ package x.system
                */
             }
 
+			renderObj.render_delay = delay;
             renderObj.render(this);
 
             return renderObj;

@@ -1,13 +1,18 @@
 package x.system
 {
+	import caurina.transitions.Tweener;
+
     import flash.events.MouseEvent;
     import flash.filters.BitmapFilterQuality;
     import flash.filters.DropShadowFilter;
-    
+
     import mx.containers.HBox;
 
     public class xRenderLine extends HBox
     {
+    	public var render_time:Number = 0.333;    	
+    	public var render_delay:Number = 0;
+
     	private var entry_line:xEntryLine;
     	private var render_entry:xRenderEntry;
     	private var words:Array;
@@ -15,6 +20,7 @@ package x.system
         public function xRenderLine()
         {
         	this.addEventListener(MouseEvent.MOUSE_OVER, showProperties);
+        	
         }
     	/*
         public function xRenderLine(render_entry:xRenderEntry)
@@ -35,15 +41,17 @@ package x.system
 			for (i = 0; i < this.numChildren; i++)
 			{
 				word = this.getChildAt(i) as xRenderWord;
+				word.render_delay = render_delay;
 				word.update(words[i])
 			}
 			
 			for (i = this.numChildren; i < words.length; i++)
 			{
 				word = new xRenderWord(words[i]);
+				word.render_delay = render_delay;
+				trace("renderDelay: " + word.render_delay);
 				addChild(word);				
 			} 
-			
 			
 			var dropShadow:DropShadowFilter = new DropShadowFilter();
 			dropShadow.color = 0x000000;

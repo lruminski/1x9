@@ -73,11 +73,8 @@ package x.system
             this.entry = entry;
             this.entry.obj.renderMode = "words";
             
-            entry.show(renderWords);
-            
             display = new xRenderEntry(entry);
             addChild(display);
-            
             
         }
 
@@ -104,64 +101,6 @@ package x.system
             }
         }
         
-        public function renderWords(event:CorrelatedMessageEvent):void
-        {
-        	
-            var result:Object = event.result;
-
-            var displayObj:DisplayObject;
-            var entry_line:xEntryLine;
-            
-        	var i:int;
-
-            if (result != null)
-            {
-
-                trace("renderLine: ");
-                
-                if (result.result)
-                { 
-                	
-                	var words:Array = result.result;
-                	for (i = 0; i < words.length; i++)
-                	{
-                		
-                		var word:Object = words[i];
-	                	if (!lines[word.line_num])
-	                	{
-			                entry_line = new xEntryLine(word.line_num, word.line_id, word.val, entry);
-	                	} else {
-	                		entry_line = lines[i];
-	                		entry_line.update_word(word.val, word.pos);
-	                	}
-		                
-		                displayObj = entry_line.render();
-		                
-		                display.addLine(displayObj);
-                		
-                	} 
-                	
-	           }
-                //current_line++;
-            	/*
-				if (result.result.words == null)
-				{
-	                trace("renderLine: ");
-	                var line:xEntryLine = new xEntryLine();
-	                line.obj = result.result.entry_line;
-	                displayObj = line.render();
-	                lines.push(line);
-	                display.addLine(displayObj);
-	                //current_line++;
-	   			}
-	   			else
-	   			{
-	   				trace("renderWords: ");
-	   			}
-	   			*/
-            }
-        }
-
         public function showError(str:String):void
         {
             show(str);

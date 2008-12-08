@@ -4,9 +4,16 @@
     /*src:url("assets/maritam.ttf");*/
     /*src:local("Marita Medium - HMK");*/
     src:local("Monaco");
-    fontFamily: main;
+    fontFamily: console;
     fontWeight: normal;
 
+    unicodeRange: U+0020-U+007E;
+}
+
+@font-face {
+    src:local("Futura");
+    fontFamily: main;
+    fontWeight: bold;
     unicodeRange: U+0020-U+007E;
 }
 
@@ -33,12 +40,13 @@ Application {
 TextInput {
    borderStyle: solid;
    cornerRadius: 11;
+   fontFamily: console;
    textAlign: "center";
 }
 
 Text {
 	fontSize: 18;
-	fontFamily: "Century Gothic";
+	fontFamily: main;
 	fontWeight: "bold";
 	color: #000000;
 }
