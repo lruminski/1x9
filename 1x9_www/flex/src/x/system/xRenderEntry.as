@@ -69,8 +69,9 @@ package x.system
                 { 
                 	
                 	var words:Array = result.result;
-                	
-                	var last_time:Number = words[0].time_elapsed;
+                	trace("?");
+                	if (words.length > 0)
+                		var last_time:Number = words[0].time_elapsed;
                 	
                 	for (i = 0; i < words.length; i++)
                 	{
@@ -97,25 +98,7 @@ package x.system
 		                this.addLine(displayObj);
                 		
                 	} 
-                	
-	           }
-                //current_line++;
-            	/*
-				if (result.result.words == null)
-				{
-	                trace("renderLine: ");
-	                var line:xEntryLine = new xEntryLine();
-	                line.obj = result.result.entry_line;
-	                displayObj = line.render();
-	                lines.push(line);
-	                display.addLine(displayObj);
-	                //current_line++;
-	   			}
-	   			else
-	   			{
-	   				trace("renderWords: ");
-	   			}
-	   			*/
+	           	}
             }
         }
         

@@ -47,8 +47,8 @@ class EntryLine < ActiveRecord::Base
         #EntryWord.create_or_update :val => new_word, :entry_id => self.entry_id, :line_id => self.id, :pos => idx, :line_num => self.line_num        
         puts "replace " + word + " with " + new_word
         sql = "INSERT INTO entry_words " +
-          "(val, entry_id, line_id, pos, line_num, created_at) VALUES ('#{new_word}', '#{self.entry_id}', '#{self.id}', '#{idx}', '#{self.line_num}', now()) " +
-          "ON DUPLICATE KEY UPDATE val='#{new_word}'"
+          "(val, entry_id, line_id, pos, line_num, created_at) VALUES (\"#{new_word}\", '#{self.entry_id}', '#{self.id}', '#{idx}', '#{self.line_num}', now()) " +
+          "ON DUPLICATE KEY UPDATE val=\"#{new_word}\""
         #puts (sql)
         ActiveRecord::Base.connection.execute(sql)        
       end
