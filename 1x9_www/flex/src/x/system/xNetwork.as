@@ -23,7 +23,7 @@ package x.system
 
         public function init():void
         {
-            comm.connect("guest", "guest", "/", "localhost");
+            comm.connect("guest", "guest", "/", "dev.1x9.ca");
             comm.authenticate(session_id, onAuthenticate);
         }
 
