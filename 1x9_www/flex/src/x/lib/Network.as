@@ -2,7 +2,6 @@ package x.lib
 {
     import flash.events.ErrorEvent;
     import flash.events.EventDispatcher;
-    
     import org.amqp.Connection;
     import org.amqp.ConnectionParameters;
     import org.amqp.error.ConnectionError;

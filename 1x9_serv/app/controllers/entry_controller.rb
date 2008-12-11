@@ -31,7 +31,7 @@ class EntryController < Application
     last_created_at = first_created_at = nil
     last_time_elapsed = 0
     nil_time = 0.0
-    lines = EntryLine.find(:all, :conditions => ["entry_id = ?", params[:id]], :group => "line_num", :order => "updated_at");    
+    lines = EntryLine.find(:all, :conditions => ["entry_id = ?", params[:id]], :order => "updated_at");    
     
     lines.each do |line|
       if last_created_at.nil?
@@ -50,7 +50,6 @@ class EntryController < Application
             word[:time_elapsed] = last_time_elapsed.to_f + 7
           end
         end
-        puts "#{word[:created_at]}, #{word[:time_elapsed]}, #{nil_time.to_f}, #{time_since_last}, #{last_time_elapsed}"
         last_created_at = word[:created_at]
         last_time_elapsed = word[:time_elapsed]
         words << word

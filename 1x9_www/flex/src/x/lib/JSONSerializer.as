@@ -1,13 +1,12 @@
 package x.lib
 {
     import com.adobe.serialization.json.JSON;
-
+    
     import flash.utils.IDataInput;
     import flash.utils.IDataOutput;
-
+    
     import org.amqp.patterns.Serializer;
-
-
+	
     public class JSONSerializer implements Serializer
     {
 

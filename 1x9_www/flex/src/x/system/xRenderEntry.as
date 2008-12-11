@@ -1,7 +1,8 @@
 package x.system
 {
     import caurina.transitions.Tweener;
-    
+  	import caurina.transitions.properties.FilterShortcuts;
+  
     import flash.display.DisplayObject;
     
     import mx.containers.VBox;
@@ -23,6 +24,7 @@ package x.system
 
         public function xRenderEntry(entry:xEntry = null)
         {
+            FilterShortcuts.init();
             
             lines = new Array();
 

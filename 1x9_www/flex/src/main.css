@@ -39,7 +39,12 @@ Application {
 
 TextInput {
    borderStyle: solid;
-   cornerRadius: 11;
+   borderColor: #eeeeee;
+   backgroundColor: #dddddd;
+   cornerRadius: 9;
+   color: #000000;
+   paddingLeft: 3;
+   paddingRight: 0;
    fontFamily: console;
    textAlign: "center";
 }

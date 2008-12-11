@@ -3,7 +3,7 @@
     xmlns:mx="http://www.adobe.com/2006/mxml"
     initialize="xInit(event)"
     creationComplete="initCore(event)"
-    backgroundColor="0xefefed" xmlns:x1="x.*">
+    backgroundColor="0xbbbbbb" xmlns:x1="x.*">
     <mx:Style source="main.css" />
     <mx:Script>
         <![CDATA[
