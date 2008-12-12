@@ -94,18 +94,17 @@ package x.system
         	trace ("saveResult[:" + type + "]");
 
 
-        	 
-        	if (result != null) {
+        	if (result.error) {
+        		trace("error: " + result.error_msg);
+        	}
+        	else if (result != null)
+        	{
         		//var tmp:Array = result.result;
         	
                 obj = result.result;
 	        	for (var key:String in obj) {
 	        		 trace ("  " + key + " => " + obj[key]);
 	        	}
-            }
-            else
-            {
-            	trace("ohh ohh");
             }
 
         }

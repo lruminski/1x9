@@ -1,3 +1,12 @@
+/***
+ * todo: 
+ * 
+ * renderWords() the result needs to placed within a queue (based on elapsed time?)
+ * 
+ * gotoDate(pos:DateTime) ability to seek to a certain position of the entry
+ * 
+ ***/
+ 
 package x.system
 {
     import caurina.transitions.Tweener;
@@ -66,7 +75,7 @@ package x.system
             {
 
                 trace("renderWords: ");
-                
+                                
                 if (result.result)
                 { 
                 	

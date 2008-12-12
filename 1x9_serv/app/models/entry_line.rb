@@ -41,7 +41,7 @@ class EntryLine < ActiveRecord::Base
     #puts "update words: " + val + " -> " + str
      
     words_old.each_with_index do |word, idx|
-      new_word = words_new[idx]
+      new_word = words_new[idx].to_s
       if new_word != word
         #rails needs a create_or_update method 
         #EntryWord.create_or_update :val => new_word, :entry_id => self.entry_id, :line_id => self.id, :pos => idx, :line_num => self.line_num        
@@ -70,6 +70,7 @@ class EntryLine < ActiveRecord::Base
       begin
         EntryWord.create :val => word, :entry_id => self.entry_id, :line_id => self.id, :pos => old_count+idx, :line_num => self.line_num
       rescue
+        debugger
         puts "destrying"
         self.destroy
       end

@@ -23,9 +23,9 @@ package x.system
 
         public function init():void
         {
-            //comm.connect("guest", "guest", "/", "127.0.0.1");
+            comm.connect("guest", "guest", "/", "127.0.0.1");
             //comm.connect("guest", "guest", "/", "192.168.3.32");
-            comm.connect("guest", "guest", "/", "dev.1x9.ca");
+            //comm.connect("guest", "guest", "/", "dev.1x9.ca");
             comm.authenticate(session_id, onAuthenticate);
         }
 
