@@ -1,14 +1,12 @@
 package x.system
 {
-	import caurina.transitions.Tweener;
+	import flash.events.MouseEvent;
+	import flash.filters.BitmapFilterQuality;
+	import flash.filters.DropShadowFilter;
+	
+	import mx.containers.VBox;
 
-    import flash.events.MouseEvent;
-    import flash.filters.BitmapFilterQuality;
-    import flash.filters.DropShadowFilter;
-
-    import mx.containers.HBox;
-
-    public class xRenderLine extends HBox
+    public class xRenderLine extends VBox
     {
     	public var render_time:Number = 0.333;    	
     	public var render_delay:Number = 0;
@@ -16,12 +14,33 @@ package x.system
     	private var entry_line:xEntryLine;
     	private var render_entry:xRenderEntry;
     	private var words:Array;
+
+    	private var timeline:Array;
+    	private var _time:uint = 0;
     	
         public function xRenderLine()
         {
         	this.addEventListener(MouseEvent.MOUSE_OVER, showProperties);
+        	this.addEventListener(xRenderTimeEvent.RENDER_TIME, renderTime);
         	
         }
+        
+        public function renderWord(word:Object):void
+        {
+        	var renderAt:Number = word.time_elapsed;
+        	if (!timeline[renderAt])
+        	{
+        		timeline[renderAt] = new Array();
+        		timeline[renderAt].push(word);
+        	}
+        }
+    	
+        private function renderTime(event:xRenderTimeEvent):void
+        {
+        	
+        } 
+        
+
     	/*
         public function xRenderLine(render_entry:xRenderEntry)
         {
@@ -41,8 +60,8 @@ package x.system
 			for (i = 0; i < this.numChildren; i++)
 			{
 				word = this.getChildAt(i) as xRenderWord;
-				word.render_delay = render_delay;
-				word.update(words[i])
+				if (word.val != words[i])
+					word.update(words[i], render_delay)
 			}
 			
 			for (i = this.numChildren; i < words.length; i++)

@@ -7,6 +7,7 @@ package x.system
         public var renderObj:xRenderLine;
         private var entry:xEntry;
 
+
         public function xEntryLine(num:int = 0, id:int = -1, val:String = "", entry:xEntry = null, type:String = "entry_lines")
         {
             if (entry == null)
