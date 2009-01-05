@@ -4,9 +4,9 @@ package x.system
 	import flash.filters.BitmapFilterQuality;
 	import flash.filters.DropShadowFilter;
 	
-	import mx.containers.VBox;
+	import mx.containers.HBox;
 
-    public class xRenderLine extends VBox
+    public class xRenderLine extends HBox
     {
     	public var render_time:Number = 0.333;    	
     	public var render_delay:Number = 0;

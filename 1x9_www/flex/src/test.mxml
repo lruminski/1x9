@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute">
+	<mx:Script>
+		<![CDATA[
+			import mx.containers.Canvas;
+			import mx.core.UIComponent;
+			import mx.controls.Text;
+		
+			import caurina.transitions.Tweener;
+			
+			private var word:String;
+			private var radius:Number;
+			private var container:Canvas;
+		
+			private function init():void
+			{
+				
+				Tweener.registerSpecialPropertySplitter("_rotation", rotation_tween);
+
+				word = "Time keeps on ticking, into the future";
+				radius = 1000;
+				
+				container = new Canvas();
+				container.x = 100;
+				container.y = 100;
+				//container.z = 100;
+
+				for (var i:int=0; i<word.length; i++)
+				{
+					var letter:Text = new Text();
+					//var _text:Text = new Text();
+					
+					letter.text = word.charAt(i);
+					//letter.layoutMatrix3D 
+					//letter.z =-5000;
+					letter.alpha = 0;
+					
+					
+					//letter.addChild(_text);
+					
+					//Tweener.addTween(letter, {_rotation:720, time:1000, delay:i*10, transition:"easeInQuad"});
+					
+					container.addChild(letter);
+
+				}
+				
+				this.addChild(container);
+			}
+
+			private function start():void
+			{
+
+				var letter:Text;
+				var prev:Text;
+				//container.z = -100;
+				//Tweener.addTween(container, {z:100, time:1, delay:5, transition:"easeInQuad"});
+
+				for (var i:int=0; i<word.length; i++)
+				{
+					
+					letter = container.getChildAt(i) as Text;
+					
+					if (i-1 >= 0)
+						prev = container.getChildAt(i-1) as Text;
+						
+					if (prev)
+					{
+						letter.x = prev.x + prev.width;					
+					}
+					trace(letter.text + ": " + letter.x + ", " );
+					//letter.z = 1000;
+					//letter.addChild(_text);
+					
+					Tweener.addTween(letter, {alpha:1, time:0.1, delay:i*.1, transition:"easeInQuad"});
+					//Tweener.addTween(letter, {z:0, time:1, delay:i*.1, transition:"easeInQuad"});
+					//Tweener.addTween(letter, {z:0, time:1000,/* delay:i*10,*/ transition:myEase});
+					//Tweener.addTween(letter, {_rotation:720, time:1000, delay:i*10, transition:"easeInQuad"});
+					
+						
+				}
+
+				
+				
+			}
+			
+		
+			/**
+			 * Easing equation function 
+			 *
+			 * @param t		Current time (in frames or seconds).
+			 * @param b		Starting value.
+			 * @param c		Change needed in value.
+			 * @param d		Expected easing duration (in frames or seconds).
+			 * @return		The correct value.
+			 */
+			public static function myEase (t:Number, b:Number, c:Number, d:Number, p_params:Object = null):Number
+			{
+				var ts:Number=(t/=d)*t;
+				var tc:Number=ts*t;
+				return b+c*(6.6975*tc*ts + -17.1925*ts*ts + 11.395*tc + 0.1*ts);
+			}
+			
+			private function rotation_tween(p_value:Number, p_parameters:Array):Array
+			{
+				var nArray:Array = new Array();
+				//var x:Number = 
+				//nArray.push({name:"_xscale", value: p_value});
+				//nArray.push({name:"_yscale", value: p_value});
+				return nArray;
+			}
+			
+			
+			
+		]]>
+	</mx:Script>
+</mx:Application>

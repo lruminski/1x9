@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application backgroundColor="0x333333" xmlns:mx="http://www.adobe.com/2006/mxml" initialize="init()" creationComplete="start()" layout="absolute">
+		<mx:Style source="main.css" />
+    	<mx:Script>
+		<![CDATA[
+			import mx.containers.Canvas;
+			import mx.core.UIComponent;
+			import mx.controls.Text;
+		
+			import caurina.transitions.Tweener;
+		    import caurina.transitions.properties.FilterShortcuts;
+			
+			private var word:String;
+			private var radius:Number;
+			
+			private var _degreeRange:int = 180;
+        	private var matrix:Matrix3D = new Matrix3D();
+        	
+        	
+			private function init():void
+			{
+				
+				Tweener.registerSpecialPropertySplitter("_rotation", rotation_tween);
+				FilterShortcuts.init();
+
+				word = "Time keeps on ticking, into the future";
+				radius = 250;
+				
+				container = new Canvas();
+
+				for (var i:int=0; i<word.length; i++)
+				{
+					var letter:Text = new Text();
+					letter.text = word.charAt(i);
+					letter.selectable = false;
+					letter.alpha = 0;
+										
+					container.addChild(letter);
+				}
+				
+				this.addChild(container);
+			}
+
+			private function start():void
+			{
+
+				var letter:Text;
+				var prev:Text;
+				var width:Number;
+
+				for (var i:int=0; i<word.length; i++)
+				{
+					var x:Number;
+					
+					letter = container.getChildAt(i) as Text;
+					
+					if (i-1 >= 0)
+						prev = container.getChildAt(i-1) as Text;
+						
+					if (prev)
+					{
+						letter.x = prev.x + prev.width;					
+					}
+					width = letter.x + letter.width;
+				}
+				trace(this.width + ", " + container.measuredWidth);
+				container.x = (this.width - width) / 2;
+				trace(container.x);
+				for (var i:int=0; i<word.length; i++)
+				{
+					letter = container.getChildAt(i) as Text;
+					letter.z = 500;
+					letter.setStyle("color", 0x999999);
+					letter.y = 200;
+					
+					radius -= 10;
+					
+					Tweener.addTween(letter, {alpha:1, time:0.1, delay:i*.1, transition:"easeInQuad"});
+					letter.rotationY = 1
+					
+					var blurIn:BlurFilter = new BlurFilter(10, 50, 5);
+					var colorIn:GradientBevelFilter = new GradientBevelFilter(10, 0, [0xea3500, 0x000000, 0xFFffff], [1, 0, 1], [0, 128, 255], 1, 1, 10);
+					letter.filters = [blurIn, colorIn];
+
+					var blurOut:BlurFilter = new BlurFilter(0, 0, 0);
+					var colorOut:GradientBevelFilter = new GradientBevelFilter(10, 90, [0xFFAA00]);
+					var dropIn = new DropShadowFilter(3, 45, 0x000000, 0.3, 10, 10, 1, 1);
+					
+					letter.rotationZ = 0;
+					Tweener.addTween(letter, {rotationY:0, time:0.1, delay:0, transition:"easeInQuad"});
+					Tweener.addTween(letter, {z:0, _filter:colorOut, time:1.5, delay:i*.1, transition:"linear", onComplete:function() { this.filters = [colorOut, dropIn]; }});
+					Tweener.addTween(letter, {rotationZ:360, _filter:blurOut, rotationX:0, time:1.5, delay:i*.1, transition:"linear"});
+						
+				}
+			}
+			
+		
+			/**
+			 * Easing equation function 
+			 *
+			 * @param t		Current time (in frames or seconds).
+			 * @param b		Starting value.
+			 * @param c		Change needed in value.
+			 * @param d		Expected easing duration (in frames or seconds).
+			 * @return		The correct value.
+			 */
+			public static function myEase (t:Number, b:Number, c:Number, d:Number, p_params:Object = null):Number
+			{
+				var ts:Number=(t/=d)*t;
+				var tc:Number=ts*t;
+				return b+c*(6.6975*tc*ts + -17.1925*ts*ts + 11.395*tc + 0.1*ts);
+			}
+			
+			private function rotation_tween(p_value:Number, p_parameters:Array):Array
+			{
+				
+				
+				var nArray:Array = new Array();
+				var x:Number = this.radius *Math.cos(Math.PI/180 * p_value) 
+				var y:Number = this.radius *Math.sin(Math.PI/180 * p_value) 
+				//nArray.push({name:"x", value: x});
+				//nArray.push({name:"y", value: y});
+				return nArray;
+			}
+			
+			
+			
+		]]>
+	</mx:Script>
+	<mx:Canvas id="container" horizontalCenter="0" />
+		
+</mx:Application>

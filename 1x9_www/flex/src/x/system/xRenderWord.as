@@ -31,6 +31,7 @@ package x.system
 			this.z = -1000;
 			this.addEventListener(Event.ADDED, added);
 			this.addEventListener(FlexEvent.UPDATE_COMPLETE, created);
+			this.addEventListener(xRenderTimeEvent.RENDER_TIME, setTime);
 
             timeline = new Array();
             timer = new Timer(1000);
@@ -71,22 +72,18 @@ package x.system
         	return _time;
         }
 
-    	public function get val():String
+    	public function get text():String
     	{
     		return _text;
     	}
     	
-    	public function set val(val:String):void
+    	public function set text(val:String):void
     	{
 			var delta:int =  val.length - text.length;
+			var direction:int;
 			
-			/***
-			 * delta is not calculated properly
-			 * 
-			 ***/
-			trace("delta: " + val + " :: " + this.text +  " delta: " + delta + " :: " + text.indexOf(val));
 			if (delta > 0) {
-				direction = 1;
+				direction = 0;
 			} else {
 				direction = 0;
 			}
@@ -123,17 +120,24 @@ package x.system
 			trace("update " + val + " delay: " + render_delay + " :: " + text + " length: " + timeline.length);
 		}
 
-        private function renderTime(event:TimerEvent):void
+
+        //private function renderTime(event:TimerEvent):void
+        private function setTime(event:xRenderTimeEvent):void
         {
-        	time += ( timer.delay/1000 )	
+        	event.time
+        	time += event.time //( timer.delay/1000 )	
         	trace("time: " + time);
         }
 		
 		private function updateLetters(event:TimerEvent):void
 		{
-			if (val != text)
+			var num:int = letter_timer.currentCount;
+			var letter:xRenderLetter = this.getChildAt(num) as xRenderLetter;
+			
+			if (letter.text != _text.charAt(num))
 			{
 				
+				letter.garbage();
 				if (val.length > text.length)
 				{
 					text += val.charAt(text.length);

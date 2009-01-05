@@ -11,9 +11,8 @@
 }
 
 @font-face {
-    src:local("Futura");
+    src:local("FFF Spacedust");
     fontFamily: main;
-    fontWeight: bold;
     unicodeRange: U+0020-U+007E;
 }
 
@@ -23,7 +22,7 @@ global {
     modalTransparencyDuration: 750;
     themeColor: #b7babc;
     fontFamily: main;
-    fontSize: 11;
+    fontSize: 8;
     fontColor: #000000;
 }
 
@@ -50,9 +49,9 @@ TextInput {
 }
 
 Text {
-	fontSize: 18;
+	fontSize: 8;
 	fontFamily: main;
-	fontWeight: "bold";
+	/*fontWeight: "bold";*/
 	color: #000000;
 }
 
