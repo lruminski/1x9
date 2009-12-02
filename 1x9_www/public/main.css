@@ -11,7 +11,7 @@
 }
 
 @font-face {
-    src:local("FFF Spacedust");
+    src:url("fonts/FFF_Spacedust.ttf");
     fontFamily: main;
     unicodeRange: U+0020-U+007E;
 }

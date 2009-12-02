@@ -24,8 +24,8 @@ module Broker
           @serv_mq = MQ.new
           directx = @serv_mq.direct(serv_exchange)
           
-          # Game exchange communication
-          @game_mq = MQ.new.topic(game_exchange)
+          # Client exchange communication
+          @game_mq = MQ.new.topic(client_exchange)
         
           #########################################################################################
         

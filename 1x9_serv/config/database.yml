@@ -1,5 +1,6 @@
+development:
   adapter: mysql
-  encoding: utf8
-  database: 1x9
   username: root
-  password:
+  database: 1x9
+  socket: /opt/local/var/run/mysql5/mysqld.sock
+  password: 

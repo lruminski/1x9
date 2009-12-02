@@ -1,5 +1,8 @@
 package x.system
 {
+	import com.greensock.TweenMax;
+	import com.greensock.easing.Quad;
+	
 	import mx.controls.Text;
 	
 	public class xRenderLetter extends Text
@@ -14,9 +17,7 @@ package x.system
 		
 		public function garbage():void
 		{
-			
-			Tweener.addTween(this, {z:-5000, alpha:0, time:garbage_time, delay:garbage_delay, onComplete:deleteMe, transition:"easeInOutQuad"});
-			
+			TweenMax.to(this, garbage_time, {z:-5000, alpha:0, delay:garbage_delay, onComplete:deleteMe, ease:Quad.easeInOut});
 		}
 		
 		

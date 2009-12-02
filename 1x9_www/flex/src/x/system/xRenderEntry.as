@@ -1,7 +1,8 @@
 package x.system
 {
-    import caurina.transitions.Tweener;
-    import caurina.transitions.properties.FilterShortcuts;
+
+    import com.greensock.TweenMax;
+    import com.greensock.easing.Sine;
     
     import flash.display.DisplayObject;
     import flash.events.TimerEvent;
@@ -17,7 +18,7 @@ package x.system
     public class xRenderEntry extends VBox
     {
     	public const RENDER_TIME:Number = 0.333;
-    	public const RENDER_TRANSITION:String = "easeOutSine";
+    	public const RENDER_TRANSITION:Function = Sine.easeOut;
     	public const MAX_PAUSE_TIME:Number = 5;
     	
     	public const UPDATE_TIME:uint = 1000;
@@ -35,7 +36,6 @@ package x.system
 
         public function xRenderEntry(entry:xEntry = null)
         {
-            FilterShortcuts.init();
             
             lines = new Array();
             timeline = new Array();
@@ -166,8 +166,8 @@ package x.system
         {
         	var target:DisplayObject = event.target as DisplayObject;
 			var delayIndex:Number = 1;
-			
-			Tweener.addTween(event.target, {alpha:1, time:RENDER_TIME, transition:RENDER_TRANSITION});
+			TweenMax.to( event.target, RENDER_TIME, {alpha:1, transition:RENDER_TRANSITION} );
+			//.addTween(event.target, {alpha:1, time:RENDER_TIME, transition:RENDER_TRANSITION});
         }
         
         private function consumeEntry(event:CorrelatedMessageEvent):void

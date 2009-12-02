@@ -2,11 +2,11 @@ package x.system
 {
     import flash.display.DisplayObject;
     
-    import mx.containers.VBox;
+    import mx.core.UIComponent;
     
     import org.amqp.patterns.CorrelatedMessageEvent;
 
-    public class xScreen extends VBox
+    public class xScreen extends UIComponent
     {
 
         public var display:xRenderEntry;

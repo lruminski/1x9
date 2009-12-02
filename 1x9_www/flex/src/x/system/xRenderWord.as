@@ -1,6 +1,7 @@
 package x.system
 {
-	import caurina.transitions.Tweener;
+	import com.greensock.TweenMax;
+	import com.greensock.easing.Quad;
 	
 	import flash.display.DisplayObject;
 	import flash.events.Event;
@@ -22,6 +23,7 @@ package x.system
     	private var timer:Timer;
     	private var letter_timer:Timer;
     	private var _time:uint = 0;
+    	private var _val:String;
     	//private var direction:int;
     	
 		public function xRenderWord(val:String)
@@ -35,7 +37,7 @@ package x.system
 
             timeline = new Array();
             timer = new Timer(1000);
-            timer.addEventListener(TimerEvent.TIMER, renderTime);
+            timer.addEventListener(TimerEvent.TIMER, setTime);
 			
 			var filter:BlurFilter=new BlurFilter(7,7,BitmapFilterQuality.HIGH);  
 			var filters_array:Array=new Array();  
@@ -44,6 +46,17 @@ package x.system
 			this.filters = filters_array;			
 		}
 		
+		
+        public function set val(val:*):void
+        {
+            _val = val;
+        }
+        
+        public function get val():*
+        {
+            return _val;   
+        }
+        
         public function set time(val:uint):void
         {
         	var i:uint;
@@ -170,9 +183,10 @@ package x.system
         	var target:DisplayObject = event.target as DisplayObject;
         	trace("added " + text + "::"  + target + " delay: " + render_delay + ", alpha: " + alpha);
         	//this.alpha = 0;
-			Tweener.addTween(event.target, {alpha:1, time:render_time,scaleX:1, delay:render_delay, transition:"easeInOutQuad"});
+        	TweenMax.to(event.target, render_time, {alpha:1,scaleX:1, delay:render_delay, ease:Quad.easeInOut});
+			//Tweener.addTween(
 			
-			Tweener.addTween(event.target, {_Blur_blurX:0, _Blur_blurY:0, time:render_time, delay:render_delay, transition:"easeInQuad"});
+			TweenMax.to(event.target, render_time, {_Blur_blurX:0, _Blur_blurY:0, delay:render_delay, ease:Quad.easeIn});
         	 
         }
 
