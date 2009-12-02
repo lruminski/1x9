@@ -8,15 +8,14 @@
 			import mx.controls.Text;
 		
 			import caurina.transitions.Tweener;
-		    import caurina.transitions.properties.FilterShortcuts;
+			import caurina.transitions.properties.FilterShortcuts;
 			
 			private var word:String;
 			private var radius:Number;
 			
 			private var _degreeRange:int = 180;
-        	private var matrix:Matrix3D = new Matrix3D();
-        	
-        	
+			private var matrix:Matrix3D = new Matrix3D();
+			
 			private function init():void
 			{
 				
