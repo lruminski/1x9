@@ -2,7 +2,7 @@
 # Modified with permission by 1X9
 
 module Broker
-  require "activesupport"
+  require "active_support"
   module Base
     
     class << self
